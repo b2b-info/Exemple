@@ -25,9 +25,10 @@ public class Main {
         Film[] films = new Film[MAX_FILMS];
 
         Scanner saisie = new Scanner(System.in);
+        // indice du prochain film dans le tableau
         int indiceFilm = 0;
-
         boolean choixValide = false;
+
         while (choix != OptionsMenu.QUITTER) {
             while (!choixValide) {
                 afficherMenu();
@@ -61,14 +62,26 @@ public class Main {
         }
     }
 
+    /**
+     * Affiche les films contenus dans le tableau de films
+     * @param films le tableau de films
+     */
     private static void afficherListe(Film[] films) {
+
+        System.out.println("\nLa liste de films : ");
         for (int i = 0; i < films.length; i++) {
             if (films[i] != null) {
-                System.out.println((i + 1) + " " + films[i]);
+                System.out.println((i + 1) + " - " + films[i]/*.toString()*/);
             }
         }
     }
 
+    /**
+     * Crée un film en demandant le titre, l'année et le réalisateur à l'utilisateur
+     *
+     * @param saisie
+     * @return le film créé
+     */
     private static Film creerFilm(Scanner saisie) {
         System.out.print("Saisir le titre du film : ");
         String titre = saisie.nextLine();
@@ -90,12 +103,17 @@ public class Main {
         }
     }
 
+    /**
+     * Affichage du menu de films
+     */
     private static void afficherMenu() {
 
+        System.out.println("***************** MENU *******************");
         for (OptionsMenu option : OptionsMenu.values()) {
             System.out.println(option);
         }
         System.out.print("Votre choix: ");
+
 
     }
 
