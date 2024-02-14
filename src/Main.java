@@ -1,6 +1,10 @@
 import ca.qc.bdeb.sim202.videotheque.Film;
 import ca.qc.bdeb.sim202.videotheque.OptionsMenu;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -55,6 +59,10 @@ public class Main {
                     }
                 }
 
+                case CHARGER -> {
+                    indiceFilm = chargerFichier(films, indiceFilm);
+                }
+
                 case CONSULTER -> {
                     afficherListe(films);
                 }
@@ -62,8 +70,26 @@ public class Main {
         }
     }
 
+    private static int chargerFichier(Film[] films, int indiceFilm) {
+
+        try {
+            BufferedReader fichier = new BufferedReader(new FileReader("films.csv"));
+            String ligne = fichier.readLine();
+            while (ligne!= null){
+                films[indiceFilm++] = Film.deSerialiser(ligne);
+                ligne = fichier.readLine();
+            }
+        } catch (FileNotFoundException e) {
+            System.err.println("Fichier introuvable!!");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return indiceFilm;
+    }
+
     /**
      * Affiche les films contenus dans le tableau de films
+     *
      * @param films le tableau de films
      */
     private static void afficherListe(Film[] films) {

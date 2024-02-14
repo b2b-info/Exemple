@@ -4,6 +4,9 @@ public enum OptionsMenu {
 
     CONSULTER("Consulter la liste de films"),
     AJOUTER("Ajouter un film"),
+    SUPPRIMER("Supprimer un film"),
+    SAUVEGARDER("Sauvegarder la liste de films"),
+    CHARGER("Charger un fichier de films"),
     QUITTER("Quitter");
 
     private String affichage;
